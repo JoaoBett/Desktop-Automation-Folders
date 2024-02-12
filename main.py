@@ -5,6 +5,8 @@ DIR_NAMES = {"dir":["subdirs"]}
 #Your desktop path
 DESKTOP_PATH = "YOUR\\DESKTOP\\PATH"
 
+
+
 all_files = os.listdir(DESKTOP_PATH)
 
 #Files there
