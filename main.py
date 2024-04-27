@@ -3,17 +3,12 @@ import datetime
 
 #Your directories as a dict
 DIR_NAMES = {"dir":["subdirs"]}
-#Your desktop path
-<<<<<<< HEAD
+#Your desktop 
 DESKTOP_PATH = "YOUR\\DESKTOP\\PATH"
 #Your directories names
 DIR_NAMES = {"a":["b", "c"]}
 #Your desktop path
 DESKTOP_PATH = "Desktop"
-
-=======
-DESKTOP_PATH = "YOUR\\PATH"
->>>>>>> 2e7353749dfe566c803e672e9e06b72c63976ea4
 
 all_files = os.listdir(DESKTOP_PATH)
 
