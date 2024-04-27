@@ -17,6 +17,7 @@ The Python script automates the creation of directories on the desktop according
 ## Technologies Used
 
 - **Python**: The script is written in Python, leveraging its powerful capabilities for file manipulation and automation.
+- **Bash**: The script is written in bash, so that the user can use the command line to improve their skills in this area.
 
 ## Usage
 
@@ -25,6 +26,8 @@ To use the script:
 1. Clone this repo
 2. Customize the `DIR_NAMES` and `DESKTOP_PATH` variables according to your requirements.
 3. Run the script in a Python environment with the necessary permissions.
+
+3.1 Run the script in a Command Line(cmd)
 
 ## Screenshots
 
