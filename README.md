@@ -1,34 +1,34 @@
-# Desktop Automation Folders
+# 🖥️ Desktop Automation Folders  
 
-This repository contains a Python script for organizing directories on the desktop based on a predefined folder structure.
+This repository contains a Python script that automates the organization of directories on the desktop based on a predefined folder structure.  
 
-## About
+## 📌 About  
 
-I initiated this project to address the issue of having a cluttered desktop. Seeking both cleanliness and an opportunity to expand my portfolio, I embarked on this endeavor. It's a relatively simple project that I completed within a week, primarily as a means of honing my skills in Python and file management.
+I started this project to solve my confusing desktop. Looking for a cleaner workspace. 
 
-## DevOps Integration
+## 🚀 DevOps Integration  
 
-This project can be seen as an example of integrating automation into your daily tasks, which is a fundamental aspect of DevOps. By automating the process of organizing directories on your desktop, you are streamlining a repetitive task, reducing manual effort, and potentially minimizing errors. This aligns with the principles of DevOps, where automation plays a crucial role in enhancing efficiency, consistency, and reliability in software development and operations workflows.
+This project demonstrates how automation can be integrated into daily tasks, which is a key principle of DevOps. By automating the organization of desktop files and directories, this script:  
+- Streamlines repetitive tasks  
+- Reduces manual effort  
+- Minimizes human errors  
 
-## Script
+## ⚙️ Script Functionality  
 
-The Python script automates the creation of directories on the desktop according to the specified folder structure and moves the folders you want to each directory.
+The Python script performs the following tasks:  
+✅ Automatically creates directories based on a predefined structure  
+✅ Moves selected files into the appropriate directories  
+✅ Provides an interactive CLI for file organization  
 
-## Technologies Used
+## 🛠️ Technologies Used  
 
-- **Python**: The script is written in Python, leveraging its powerful capabilities for file manipulation and automation.
-- **Bash**: The script is written in bash, so that the user can use the command line to improve their skills in this area.
+- **Python** 🐍 – Used for file manipulation and automation  
 
-## Usage
+## 🔧 Usage  
 
-To use the script:
+To use this script:  
 
-1. Clone this repo
-2. Customize the `DIR_NAMES` and `DESKTOP_PATH` variables according to your requirements.
-3. Run the script in a Python environment with the necessary permissions.
-
-3.1 Run the script in a Command Line(cmd)
-
-## Screenshots
-
-**Still under construction**
+1. **Clone this repository**  
+   ```bash
+   git clone https://github.com/JoaoBett/Desktop-Automation-Folders.git
+   cd Desktop-Automation-Folders
