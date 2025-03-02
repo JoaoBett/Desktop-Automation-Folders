@@ -71,62 +71,23 @@ def create_directories(base_path, dir_structure):
             print(f"The directory '{misc_dir}' already exists under 'misc' at {misc_path}")
 
 
-def move_files(base_path, dir_structure):
-    """Moves files from the desktop to the appropriate directories."""
-    all_files = [f for f in os.listdir(base_path) if os.path.isfile(os.path.join(base_path, f))]
-    
-    if all_files:
-        university_path = os.path.join(base_path, "uni")
-        for file in all_files:
-            moved = False
-            for year, semesters in dir_structure["uni"].items():
-                for semester, sub_dirs in semesters.items():
-                    for sub_dir in sub_dirs:
-                        if sub_dir.lower() in file.lower():
-                            source = os.path.join(base_path, file)
-                            destination = os.path.join(university_path, year, semester, sub_dir, file)
-                            shutil.move(source, destination)
-                            print(f"File '{file}' moved to {destination}")
-                            moved = True
-                            break
-                    if moved:
-                        break
-                if moved:
-                    break
+def move_files(file, destination_path):
+    """Moves a file to the selected destination."""
+    source = os.path.join(DESKTOP_PATH, file)
+    final_path = os.path.join(destination_path, file)
 
-            # Check and move files to misc directories
-            if not moved:
-                for misc_dir in dir_structure["misc"]:
-                    if misc_dir.lower() in file.lower():
-                        source = os.path.join(base_path, file)
-                        destination = os.path.join(base_path, "misc", misc_dir, file)
-                        shutil.move(source, destination)
-                        print(f"File '{file}' moved to {destination}")
-                        moved = True
-                        break
-
-            # Check and move files to studies directories
-            if not moved:
-                for study_dir in dir_structure["estudos"]:
-                    if study_dir.lower() in file.lower():
-                        source = os.path.join(base_path, file)
-                        destination = os.path.join(base_path, "studies", study_dir, file)
-                        shutil.move(source, destination)
-                        print(f"File '{file}' moved to {destination}")
-                        moved = True
-                        break
+    shutil.move(source, final_path)
+    print(f"File '{file}' moved to {final_path}\n")
 
 
 def select_files(base_path, dir_structure):
-    """Select where each files goes to."""
-    #Scan every file in the base_path
+    """Select where each file goes."""
     all_files = [f for f in os.listdir(base_path) if os.path.isfile(os.path.join(base_path, f))]
     file_names = []
     repeated_files = dir_structure.keys()
 
-    #Remove every file that is in the dir_structure
     for file in all_files:
-        if file not in repeated_files: 
+        if file not in repeated_files:
             file_names.append(file)
 
     for file in file_names:
@@ -140,39 +101,42 @@ def select_files(base_path, dir_structure):
             try:
                 choice = int(input("Enter the number of the destination folder: ")) - 1
 
-                #Exit Software
                 if choice == -1:
                     print("Exiting program...")
                     time.sleep(1)
                     os.sys.exit(0)
-                #Display Each Folder Index
+
                 elif 0 <= choice < len(folder_options):
                     destination = folder_options[choice]
-                    
-                    # Navigate through subfolders
-                    final_destination = get_final_destination(destination, dir_structure)
+                    final_destination = get_final_destination(destination, dir_structure, base_path)
                     print(f"Moving '{file}' to {final_destination}")
+
+                    move_files(file, final_destination)
                     time.sleep(2.5)
                     os.system("cls")
                     break
                 else:
                     print("Invalid choice. Please enter a valid number.")
-            
+
             except ValueError:
                 print("ERROR - Invalid destination")
 
-def get_final_destination(base_folder, dir_structure):
-    """Navigate through each subfolders until no more folders. """
+def get_final_destination(base_folder, dir_structure, base_path):
+    """Navigate through subfolders until reaching the final destination."""
     current_folder = base_folder
-    current_structure = dir_structure[current_folder]  
+    current_structure = dir_structure[current_folder]
+    full_path = os.path.join(base_path, current_folder)
 
-    while isinstance(current_structure, dict): 
-        subfolders = list(current_structure.keys())
+    while isinstance(current_structure, dict) or isinstance(current_structure, list):
+        if isinstance(current_structure, dict):
+            subfolders = list(current_structure.keys())
+        else:
+            subfolders = current_structure
 
         if not subfolders:
             break
         
-        #print(f"Subfolders in {current_folder}: {subfolders}")
+        print(f"\nWhere should the file go inside '{full_path}'?")
         print("\n0: Exit program")
         for idx, sub in enumerate(subfolders, 1):
             print(f"{idx}: {sub}")
@@ -183,27 +147,30 @@ def get_final_destination(base_folder, dir_structure):
                 break
             choice = int(choice) - 1
 
-            #Exit Software
             if choice == -1:
                 print("Exiting program...")
                 time.sleep(1)
                 os.sys.exit(0)
-            #Display Each Folder Index
             elif 0 <= choice < len(subfolders):
-                current_folder = os.path.join(current_folder, subfolders[choice])
-                current_structure = current_structure[subfolders[choice]]
+                current_folder = subfolders[choice]
+                full_path = os.path.join(full_path, current_folder)
+
+                if isinstance(current_structure, dict):
+                    current_structure = current_structure[current_folder]
+                elif isinstance(current_structure, list):
+                    break 
             else:
                 print("Invalid choice. Try again.")
         except ValueError:
             print("Invalid input. Try again.")
 
-    return current_folder
+    return full_path
+
 
 def main():
     """Main function to run the script."""
     #create_directories(DESKTOP_PATH, DIR_NAMES)
     select_files(DESKTOP_PATH, DIR_NAMES)
-    #move_files(DESKTOP_PATH, DIR_NAMES)
 
 if __name__ == "__main__":
     main()
